@@ -59,10 +59,6 @@ func serveGo4(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 	if req.URL.Path == "/" {
-		if req.TLS == nil {
-			http.Redirect(w, req, "https://go4.org/", http.StatusFound)
-			return
-		}
 		io.WriteString(w, header)
 		io.WriteString(w, `
 </head>
@@ -109,10 +105,6 @@ func serveGo4(w http.ResponseWriter, req *http.Request) {
 }
 
 func serveGo4GRPC(w http.ResponseWriter, req *http.Request) {
-	if req.TLS == nil {
-		http.Redirect(w, req, "https://grpc.go4.org"+req.URL.Path, http.StatusFound)
-		return
-	}
 	target := "https://godoc.org/grpc.go4.org" + req.URL.Path
 	if strings.IndexAny(target, " \t\n\r'\"<>&") != -1 {
 		w.WriteHeader(400)
@@ -128,10 +120,6 @@ func serveGo4GRPC(w http.ResponseWriter, req *http.Request) {
 }
 
 func serveGo4GRPCCodegen(w http.ResponseWriter, req *http.Request) {
-	if req.TLS == nil {
-		http.Redirect(w, req, "https://grpc-codegen.go4.org"+req.URL.Path, http.StatusFound)
-		return
-	}
 	target := "https://godoc.org/grpc-codegen.go4.org" + req.URL.Path
 	if strings.IndexAny(target, " \t\n\r'\"<>&") != -1 {
 		w.WriteHeader(400)
