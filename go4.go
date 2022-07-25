@@ -53,6 +53,12 @@ const internHTML = `<html>
 <meta name="go-import" content="go4.org/intern git https://github.com/go4org/intern">
 `
 
+const netipxHTML = `<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="go-import" content="go4.org/netipx git https://github.com/go4org/netipx">
+`
+
 func serveGo4(w http.ResponseWriter, req *http.Request) {
 	if req.URL.Path == "/golang/go-blockchain-support-whitepaper.pdf" {
 		http.Redirect(w, req, "https://www.youtube.com/watch?v=dQw4w9WgXcQ", http.StatusFound)
@@ -66,6 +72,7 @@ func serveGo4(w http.ResponseWriter, req *http.Request) {
 <p>Misc <a href="https://golang.org/">Go</a> packages.</p>
 <ul>
   <li><a href="https://godoc.org/?q=go4.org">Browse</a></li>
+  <li><a href="https://github.com/go4org">GitHub org</a></li>
   <li><a href="https://github.com/go4org/go4/">About</a></li>
 </ul>
 <p>
@@ -88,6 +95,8 @@ func serveGo4(w http.ResponseWriter, req *http.Request) {
 		io.WriteString(w, grpcHTML)
 	case strings.HasPrefix(req.URL.Path, "/mem"):
 		io.WriteString(w, memHTML)
+	case strings.HasPrefix(req.URL.Path, "/netipx"):
+		io.WriteString(w, netipxHTML)
 	case strings.HasPrefix(req.URL.Path, "/intern"):
 		io.WriteString(w, internHTML)
 	case strings.HasPrefix(req.URL.Path, "/unsafe"):
